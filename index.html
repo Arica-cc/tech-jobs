@@ -1,0 +1,555 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>技术职能海外招聘 · 职位库</title>
+<style>
+:root{
+  --bg:#F3F2EE;
+  --surface:#FFFFFF;
+  --surface-2:#ECEAE4;
+  --ink:#1C2126;
+  --ink-soft:#5B6470;
+  --ink-faint:#8B93A0;
+  --accent:#0E7C74;
+  --accent-ink:#04302D;
+  --accent-soft:#DCEFEC;
+  --amber:#C97A1F;
+  --amber-soft:#F6E6D2;
+  --line:#DFDDD5;
+  --shadow: 0 1px 2px rgba(28,33,38,.06), 0 8px 24px -12px rgba(28,33,38,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15181B;
+    --surface:#1D2125;
+    --surface-2:#24282C;
+    --ink:#EDEBE6;
+    --ink-soft:#A8AFB6;
+    --ink-faint:#767D84;
+    --accent:#38B3A6;
+    --accent-ink:#DFF6F1;
+    --accent-soft:#1D3733;
+    --amber:#E0A251;
+    --amber-soft:#3A2E1B;
+    --line:#31363A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15181B;
+  --surface:#1D2125;
+  --surface-2:#24282C;
+  --ink:#EDEBE6;
+  --ink-soft:#A8AFB6;
+  --ink-faint:#767D84;
+  --accent:#38B3A6;
+  --accent-ink:#DFF6F1;
+  --accent-soft:#1D3733;
+  --amber:#E0A251;
+  --amber-soft:#3A2E1B;
+  --line:#31363A;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+}
+
+*{box-sizing:border-box;}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  margin:0;
+  font-family:"IBM Plex Sans", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  padding-inline:16px;
+}
+::selection{ background:var(--accent-soft); color:var(--accent-ink); }
+
+.wrap{ max-width:720px; margin:0 auto; }
+
+.hero{
+  padding-block:28px 18px;
+  display:flex; flex-direction:column; gap:6px;
+}
+.hero .eyebrow{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent); font-weight:600;
+}
+.hero h1{
+  font-family:"Sora", "PingFang SC", sans-serif;
+  font-size:clamp(26px,6vw,34px);
+  line-height:1.15;
+  margin:0;
+  text-wrap:balance;
+  letter-spacing:-0.01em;
+}
+.hero p{
+  margin:2px 0 0;
+  color:var(--ink-soft);
+  font-size:14.5px;
+  line-height:1.5;
+}
+.stats{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:12.5px;
+  color:var(--ink-faint);
+  margin-top:8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.search-bar{
+  position:sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index:5;
+  background:var(--bg);
+  padding-block:10px 12px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.search-input-row{
+  display:flex; align-items:center; gap:8px;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 14px;
+  box-shadow:var(--shadow);
+}
+.search-input-row svg{ flex:none; color:var(--ink-faint); }
+.search-input-row input{
+  border:none; outline:none; background:transparent;
+  font-size:15px; color:var(--ink); width:100%;
+  font-family:"IBM Plex Sans", sans-serif;
+}
+.search-input-row input::placeholder{ color:var(--ink-faint); }
+
+.chip-row{
+  display:flex; flex-wrap:wrap; gap:8px;
+  padding-bottom:2px;
+}
+.chip{
+  flex:none;
+  font-family:"IBM Plex Mono", monospace;
+  font-size:12.5px;
+  padding:7px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:var(--surface);
+  color:var(--ink-soft);
+  cursor:pointer;
+  white-space:nowrap;
+  display:flex; align-items:center; gap:6px;
+  transition:background .12s ease, color .12s ease, border-color .12s ease;
+}
+.chip:hover{ border-color:var(--accent); }
+.chip .n{ color:var(--ink-faint); }
+.chip.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
+.chip.active .n{ color:rgba(255,255,255,.75); }
+
+.list{ display:flex; flex-direction:column; gap:12px; padding-block:14px 40px; }
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px 18px;
+  box-shadow:var(--shadow);
+}
+.card-top{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+  margin-bottom:8px;
+}
+.card-tag{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:11px;
+  color:var(--amber);
+  background:var(--amber-soft);
+  padding:3px 8px;
+  border-radius:6px;
+  letter-spacing:.02em;
+}
+.card-tag.jd-match{
+  color:var(--ink-faint);
+  background:var(--surface-2);
+}
+mark{
+  background:var(--amber-soft);
+  color:var(--accent-ink);
+  border-radius:3px;
+  padding:0 1px;
+}
+.card-id{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:11px;
+  color:var(--ink-faint);
+}
+.card h3{
+  font-family:"Sora", "PingFang SC", sans-serif;
+  font-size:18px;
+  margin:2px 0 6px;
+  line-height:1.35;
+  text-wrap:balance;
+}
+.badge-row{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.card .salary{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:13.5px;
+  color:var(--accent-ink);
+  background:var(--accent-soft);
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:6px;
+  font-variant-numeric: tabular-nums;
+}
+.card .location{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:13.5px;
+  color:var(--ink-soft);
+  background:var(--surface-2);
+  display:inline-block;
+  padding:3px 9px;
+  border-radius:6px;
+}
+.jd{
+  font-size:13.5px;
+  line-height:1.65;
+  color:var(--ink-soft);
+  white-space:pre-line;
+  max-height:5.6em;
+  overflow:hidden;
+  position:relative;
+}
+.jd.expanded{ max-height:none; }
+.jd:not(.expanded)::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0; height:2.6em;
+  background:linear-gradient(to bottom, transparent, var(--surface));
+}
+.card-actions{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:12px; padding-top:12px;
+  border-top:1px dashed var(--line);
+  gap:10px;
+}
+.toggle-btn{
+  font-family:"IBM Plex Mono", monospace;
+  font-size:12.5px;
+  color:var(--ink-soft);
+  background:none; border:none; cursor:pointer;
+  padding:6px 0;
+  display:flex; align-items:center; gap:4px;
+}
+.toggle-btn:hover{ color:var(--ink); }
+.right-actions{ display:flex; align-items:center; gap:8px; }
+.copy-btn{
+  font-family:"IBM Plex Sans", sans-serif;
+  font-weight:600;
+  font-size:13.5px;
+  color:var(--accent-ink);
+  background:var(--accent-soft);
+  border:none; border-radius:10px;
+  padding:9px 14px;
+  cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
+  white-space:nowrap;
+  transition:background .12s ease, color .12s ease;
+}
+.copy-btn:hover{ filter:brightness(1.04); }
+.copy-btn.copied{
+  background:var(--accent);
+  color:#fff;
+}
+.apply-btn{
+  font-family:"IBM Plex Sans", sans-serif;
+  font-weight:600;
+  font-size:13.5px;
+  color:#fff;
+  background:var(--accent);
+  border:none; border-radius:10px;
+  padding:9px 16px;
+  text-decoration:none;
+  display:inline-flex; align-items:center; gap:6px;
+  white-space:nowrap;
+}
+.apply-btn:hover{ filter:brightness(1.06); }
+
+.empty{
+  text-align:center;
+  color:var(--ink-faint);
+  padding:60px 20px;
+  font-size:14px;
+}
+
+.footer-note{
+  text-align:center;
+  color:var(--ink-faint);
+  font-size:12px;
+  padding-block:8px 36px;
+  line-height:1.6;
+}
+.footer-note a{ color:var(--accent); }
+.jp-btn{
+  border:1px solid var(--accent); color:var(--accent); background:transparent;
+  border-radius:10px; padding:9px 12px; font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+}
+.jp-btn:hover{ background:var(--surface-2); }
+.card-actions{ flex-wrap:wrap; row-gap:10px; }
+.right-actions{ flex-wrap:wrap; justify-content:flex-end; }
+.toggle-btn, .jp-btn, .copy-btn, .apply-btn{ white-space:nowrap; }
+@media (max-width:560px){
+  .right-actions{ width:100%; justify-content:flex-start; }
+}
+.modal-back{ position:fixed; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; padding:16px; z-index:50; }
+.modal-back[hidden]{ display:none; }
+.modal{ background:var(--surface); color:var(--ink); border-radius:16px; max-width:640px; width:100%; max-height:85vh; overflow:auto; padding:22px 22px 18px; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+.modal h2{ margin:0 0 12px; font-size:18px; }
+.modal pre{ white-space:pre-wrap; word-break:break-word; font:inherit; font-size:14px; line-height:1.75; margin:0; }
+.modal-close{ float:right; border:none; background:var(--surface-2); color:var(--ink); border-radius:8px; padding:6px 10px; cursor:pointer; font:inherit; }
+.hit-divider{ margin:18px 4px 6px; font-size:13px; color:var(--ink-faint); border-top:1px dashed var(--surface-2); padding-top:12px; }
+</style>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="eyebrow">技术职能海外招聘 &middot; 职位库</div>
+    <h1>找到你要投的那个岗位</h1>
+    <p>来自技术职能海外招聘频道的在招职位,可以直接搜索关键字,或按类别筛选。</p>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="search-bar">
+    <div class="search-input-row">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="searchInput" type="text" placeholder="搜索职位名称或职责关键字,如「前端」「风控」「设计」" />
+    </div>
+    <div class="chip-row" id="chipRow"></div>
+  </div>
+
+  <div class="list" id="list"></div>
+  <div class="empty" id="empty" hidden>没有找到符合条件的职位,换个关键字试试。</div>
+
+  <div class="footer-note">共收录 7 个职位&nbsp;&middot;&nbsp;有意向请通过 Telegram 联系 <a href="https://t.me/y666899y" target="_blank" rel="noopener">@y666899y</a></div>
+</div>
+
+<div class="modal-back" id="jpModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="jpTitle">
+    <button class="modal-close" id="jpClose">关闭 ✕</button>
+    <h2 id="jpTitle"></h2>
+    <pre id="jpBody"></pre>
+  </div>
+</div>
+
+<script>
+const JOBS = [{"id": "1", "title": "【BT】Rust 工程师", "salary": "30～45k", "location": "日本横滨", "jd": "国籍要求：不限\n工作时长：8小时，周休1日\n\n🏢 公司：BT（日本横滨 · 真人视讯项目）\n\n*硬性要求：5年以上工作经验；Rust 实际经验1年以上，或3年以上桌面应用开发经验\n岗位职责：\n1. 负责 Rust 桌面应用程序的开发和维护\n2. 构建图像/视频识别模型，并集成到桌面应用程序中\n\n任职要求：\n1. 5年以上工作经验，计算机专业本科及以上学历，有扎实的编程基础\n2. 熟练掌握 Rust 语言，不少于1年的实际经验；或者3年以上桌面应用程序开发经验（其他语言）\n\n其他说明：试用期两个月\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可折现换补贴\n2. 餐食：上班日提供中餐\n3. 住宿：提供宿舍，1人或2人一间，试用期后可外宿（外宿无补贴）\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补、生活补助\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "技术开发", "notes": [], "tg": "y666899y"}, {"id": "2", "title": "【BT】技术客服", "salary": "300k日元，能力优秀者薪资另议", "location": "日本横滨", "jd": "国籍要求：日本永居或日配，中文需流利\n工作时长：8小时，周休1日，上班时间 23:00-08:00（夜班）\n\n🏢 公司：BT（日本横滨 · 真人视讯项目）\n\n*硬性要求：日本永居或日配身份；能长期夜班\n岗位职责：\n1. 实时监控系统状况，及时回复各种群消息\n\n任职要求：\n1. 具备最基本的计算机和网络知识\n2. 中文听说读写\n3. 能长期夜班\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可折现换补贴\n2. 餐食：上班日提供中餐\n3. 住宿：提供宿舍，1人或2人一间，试用期后可外宿（外宿无补贴）\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补、生活补助\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "技术支持", "notes": [], "tg": "y666899y"}, {"id": "3", "title": "【BT】人资行政专员", "salary": "27-32万日元（可议）", "location": "日本横滨", "jd": "国籍要求：台湾籍 / 马来西亚籍佳\n工作时长：8小时，周休1日\n\n🏢 公司：BT（日本横滨 · 真人视讯项目）\n\n*硬性要求：日语N2；不可外宿\n岗位职责：\n1. 签证事务对接与跟进：负责签证相关事务的对接与进度跟进，配合行政书士办理员工签证及在留资格相关手续\n2. 招聘及员工入离职管理：协助人事完成员工招聘全流程，根据公司规定及员工需求做好招聘、入职、离职等相关手续\n3. 员工日常行政及后勤管理：负责员工订餐、团建活动组织、物资采购等工作；配合司机安排员工接送机，并根据公司预算及规定办理员工机票预订\n4. 考勤及员工纪律管理：负责员工日常考勤及工作纪律管理，进行日常查岗；对于违反公司规章制度的行为，按照公司规定进行相应处理\n5. 宿舍及办公室管理：负责员工宿舍及办公室的日常维护与管理，及时联系房东及相关维修人员处理宿舍、办公室的维修及故障问题\n6. 薪资核算：负责员工考勤数据整理及工资核算，配合完成每月薪资发放相关工作\n\n任职要求：\n1. 需要有日语N2\n2. 会用办公软件\n3. 有多语言优先\n4. 不可外宿\n\n其他说明：试用期两个月\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可折现换补贴\n2. 餐食：上班日提供中餐\n3. 住宿：提供宿舍，1人或2人一间，试用期后可外宿（外宿无补贴）\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补、生活补助\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "人事行政与法务", "notes": [], "tg": "y666899y"}, {"id": "4", "title": "【BT】游戏数据分析师", "salary": "30K-40K（可无经验者，薪资18K）", "location": "日本大阪", "jd": "国籍要求：非中国籍\n工作时长：8小时，周休1日\n\n🏢 公司：BT（日本大阪 · 区块链项目）\n\n公司介绍：\n区块链基础设施公司，产品覆盖 AA 智能账户钱包、面向交易所和企业客户的托管钱包、数字资产理财系统、多租户账户和权限体系、基于 OIDC 的 SSO 和 SLO、企业级数字资产金库，以及多签、交易解析、审批流和风险预警。客户端包括 PC Web、移动端 H5、iOS 和 Android（移动端主要使用 React Native）；后端主要使用 Go，智能合约使用 Solidity 和 Foundry，前端主要使用 JavaScript 和 TypeScript。\n\n*硬性要求：非中国籍\n岗位职责：\n1. 负责专项业务全域的数据分析，通过统计分析、建模等方式，产出相关数据结论，识别业务问题，输出方案来推动业务增长\n2. 对真人视讯游戏数据分析，熟悉赌场游戏概率原理并进行 RTP、House Edge 计算、EV 计算\n3. 与各业务团队（产品、市场、运营等角色）对接，支持相关的数据和分析需求，并构建数据分析体系，推动数据自动化、平台化\n4. 用户留存、流失召回等围绕着用户增长相关的指标体系设计优化及专题分析\n\n任职要求：\n1. 计算机/统计学/数学等相关专业统招本科及以上学历\n2. 3年以上工作经验，在商业分析/数据建模方向上有深入的实践总结\n3. 数学能力强，需要精通几率与统计概念，能自行运算游戏机率\n4. 统计基础扎实，熟练使用 SQL、Excel、BI 软件，熟悉数据可视化的方法和规范\n\n其他说明：住宿为1人间宿舍\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可换1个月工资＋4,000CNY\n2. 餐食：包两餐\n3. 住宿：提供宿舍，1人或2人一间\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "风控与数据", "notes": [], "tg": "y666899y"}, {"id": "5", "title": "【BT】运营客服专员", "salary": "13K，转正14K，满一年15K；转正后有提成绩效，平均3K-5K", "location": "日本大阪", "jd": "国籍要求：台湾籍 / 马来西亚籍佳\n工作时长：10小时，周休1日，三班制轮班（约一个月轮一次）：早班 06:00-16:00 / 中班 14:00-00:00 / 晚班 22:00-08:00\n\n🏢 公司：BT（日本大阪 · 区块链项目）\n\n公司介绍：\n区块链基础设施公司，产品覆盖 AA 智能账户钱包、面向交易所和企业客户的托管钱包、数字资产理财系统、多租户账户和权限体系、基于 OIDC 的 SSO 和 SLO、企业级数字资产金库，以及多签、交易解析、审批流和风险预警。客户端包括 PC Web、移动端 H5、iOS 和 Android（移动端主要使用 React Native）；后端主要使用 Go，智能合约使用 Solidity 和 Foundry，前端主要使用 JavaScript 和 TypeScript。\n\n*硬性要求：大学学历（必须大学3年毕业，并提供证书）；中文打字每分钟40字以上\n岗位职责：\n1. 与其他部门或管理层沟通，解决问题并加快工作进度\n2. 帮助客户支持解决问题并完成工作\n3. 解决投诉并满足客户对服务和流程的期望\n4. 检查报告、记录和申请，以确保内容准确\n5. 正确有效地的聊天以及快速的客户问题\n6. 回应并解决客户问题，创造，维护高质量的水平于所有的客户\n7. 每天记录聊天消息并向运营团队负责人报告更新情况\n8. 执行可能临时分配的所有其他任务\n9. 严格按照管理层设定的期限和 KPI 完成工作\n\n任职要求：\n1. 中文打字每分钟40字或以上\n2. 可以使用中英文沟通和文字沟通\n3. 文字客服经验，有经验者优先\n4. 拥有大学学历（必须大学3年毕业，并提供证书）\n\n其他说明：住宿为2人间宿舍\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可换1个月工资＋4,000CNY\n2. 餐食：包两餐\n3. 住宿：提供宿舍，1人或2人一间\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "运营与客服", "notes": [], "tg": "y666899y"}, {"id": "6", "title": "【BT】资深 Golang 后端工程师（Web3方向）", "salary": "面议", "location": "日本大阪", "jd": "国籍要求：台湾籍 / 马来西亚籍优先（中国籍可）\n工作时长：8小时，周休1日\n\n🏢 公司：BT（日本大阪 · 区块链项目）\n\n公司介绍：\n区块链基础设施公司，产品覆盖 AA 智能账户钱包、面向交易所和企业客户的托管钱包、数字资产理财系统、多租户账户和权限体系、基于 OIDC 的 SSO 和 SLO、企业级数字资产金库，以及多签、交易解析、审批流和风险预警。客户端包括 PC Web、移动端 H5、iOS 和 Android（移动端主要使用 React Native）；后端主要使用 Go，智能合约使用 Solidity 和 Foundry，前端主要使用 JavaScript 和 TypeScript。\n\n*硬性要求：3年以上 Golang 开发经验\n岗位职责：\n1. 负责高并发、高可用后端服务开发及 API 设计\n2. 负责 Web3 / EVM 链相关服务开发，包括链上数据处理、智能合约事件监听、RPC/WebSocket 节点对接等\n3. 负责微服务架构设计、数据库及缓存优化，提升系统性能与稳定性\n4. 配合 DevOps 完成 Docker、Kubernetes 容器化部署及 CI/CD\n\n任职要求：\n1. 本科及以上学历，计算机相关专业优先\n2. 3~8年以上 Golang 开发经验，熟悉 Go 并发开发\n3. 有互联网、高并发系统开发经验\n4. 有 Web3、交易所、钱包、公链、DeFi、支付等相关项目经验者优先\n5. 熟悉 MySQL、PostgreSQL、Redis\n6. 熟悉 Kafka、RocketMQ、Pulsar 等至少一种消息队列\n7. 熟悉 HTTP/RESTful、gRPC、WebSocket\n8. 熟悉 Gin、Fiber、Kratos 等至少一种 Go 框架\n9. 熟悉 Docker、Kubernetes 基本使用\n10. 学习能力强，能独立负责模块开发\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可换1个月工资＋4,000CNY\n2. 餐食：包两餐\n3. 住宿：提供宿舍，1人或2人一间\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "技术开发", "notes": [], "tg": "y666899y"}, {"id": "7", "title": "【BT】行政专员", "salary": "面议，根据经验及能力确定", "location": "日本大阪", "jd": "国籍要求：台湾籍或马来西亚籍\n工作时长：8小时，周休1日\n\n🏢 公司：BT（日本大阪 · 区块链项目）\n\n公司介绍：\n区块链基础设施公司，产品覆盖 AA 智能账户钱包、面向交易所和企业客户的托管钱包、数字资产理财系统、多租户账户和权限体系、基于 OIDC 的 SSO 和 SLO、企业级数字资产金库，以及多签、交易解析、审批流和风险预警。客户端包括 PC Web、移动端 H5、iOS 和 Android（移动端主要使用 React Native）；后端主要使用 Go，智能合约使用 Solidity 和 Foundry，前端主要使用 JavaScript 和 TypeScript。\n\n*硬性要求：本科及以上学历，符合日本工作签证申请条件\n岗位职责：\n1. 负责公司日常行政事务，包括办公环境、物资采购、住宿及相关事务安排\n2. 协助处理人事相关工作，包括招聘协调、入职手续及员工日常事务\n3. 日常费用整理、报销审核及相关台账维护\n4. 协调内外部沟通，跟进各项行政及运营工作的进度，推动事项落实\n5. 协助处理公司日常运营事务，完成上级交办的其他工作\n\n任职要求：\n1. 本科及以上学历，符合日本工作签证申请条件\n2. 具备英语沟通能力，会日语者优先\n3. 有行政、人事或综合运营相关经验者优先\n4. 具备良好的沟通协调能力，做事细心、主动，责任心强\n5. 执行力强，具备较强的抗压能力，能适应快节奏、多元化的工作环境\n6. 能配合海外出差\n\n其他说明：限女性\n\n公司福利：\n1. 年假：每年15天＋机票，不使用可换1个月工资＋4,000CNY\n2. 餐食：包两餐\n3. 住宿：提供宿舍，1人或2人一间\n4. 签证：公司提供日本技术人文签证（技人国签证）\n5. 税金：公司缴纳雇佣保险＋劳灾保险＋社会健康保险＋厚生年金（薪资为实拿，无须缴税）\n6. 补贴：每月餐补\n7. 其他：每月团建、生日礼金、四节红包、春节加倍工资、饮料水果、生活用品、日本手机话费补贴…", "cat": "人事行政与法务", "notes": [], "tg": "y666899y"}];
+const NOTES = {"日本": {"btn": "🇯🇵 日本须知", "title": "🇯🇵 日本上班须知", "anchor": "japan", "body": "日本上班须知\n\n⏰ 上班时间\n- 10:00-19:00（日本时间），午休 13:30-14:30\n- 大小周休，固定休周六\n\n🎲 入职流程\n- 入职：先在国内入职，再转日本；在日本试用期 6 个月\n- 体检＆劳动合同：体检报告没问题即签订劳动合同（体检费用可报销）\n- 办理 COE：人事协助办理\n- 日本签证：员工准备 COE 及签证所需资料，办理约 2-3 个月（费用可报销）\n- 租房：行政助理协助办理租房手续、提交房租及相关费用，员工办理入住\n\n🌟 薪资发放\n- 薪资结构：基本工资 + 补贴工资 + 加班费\n- 发放时间：次月 10-15 号，以日元核算\n- 支付方式：25 万日元打银行卡，其余金额以 USDT 支付\n\n💕 福利\n- 法定假期：依日本法定假期，一年 16 天带薪假\n- 年假：入职满 6 个月且出勤率 80% 以上，享 10 天年假\n- 年终奖：13 薪\n- 交通补助：凭票实报，上限 3 万日元/月\n- 住宿过渡：初到日本，公司提供 3 个月住宿作为过渡期，期间员工需承担部分房租（金额依实际情况而定）；过渡期后可续租该房（需自付全额房租）或外宿\n- 续租或外宿的房补（日元/月）：专员 3.3 万｜主管 4 万｜总监 8 万"}, "泰国": {"btn": "🇹🇭 泰国须知", "title": "🇹🇭 泰国上班须知", "anchor": "thailand", "body": "泰国上班须知\n\n公司基本福利待遇（不含远程办公人员）\n\n1️⃣ 发薪日期：每月 18-20 号发薪资（披索/美金）\n2️⃣ 忠诚奖：2年 2万CNY、5年 5万CNY、10年 10万CNY\n3️⃣ 年终奖：13-17 薪，未满一年依比例发放；春节双倍底薪、春节红包等\n4️⃣ 节假日福利：带薪假期与春节共 11 天（另依当地国家假期享有带薪假）；重大节日有礼金；转正后有生日礼金 600CNY\n5️⃣ 休假：每月休 6-8 天；工作满一年享 15 天带薪假，年假往返机票可报销 3000CNY；另有婚假、产假、陪产假等\n6️⃣ 住宿/房补：公寓住宿，外宿有房补\n7️⃣ 餐食：提供工作餐（早、中、晚、夜宵）\n8️⃣ 医疗报销：公司提供日常药品，或提供医疗报销\n9️⃣ 培训：到岗即安排新员工培训，初级岗位入职即有培养期\n🔟 签证与报销：入职前的签证、机票及保关费用由公司承担；公司为员工办理工签，或自行办理工签向公司报销\n\n🇹🇭 在泰国的房补、餐补\n- 每日餐补（按出勤工作日）：6U\n- 房补：专员 270U｜主管 370U｜总监 730U\n\n🫰 忠诚奖（U）\n- 在岗 2 年：2,700U\n- 在岗 5 年：6,800U\n- 在岗 10 年：13,600U"}};
+const CATS = ["技术开发", "技术支持", "产品与策划", "设计与美术", "商务与品牌", "运营与客服", "风控与数据", "人事行政与法务", "荷官与主播", "其他"];
+
+const catCounts = {};
+JOBS.forEach(j => { catCounts[j.cat] = (catCounts[j.cat]||0) + 1; });
+
+let activeCat = null;  // 每次打开都从「全部」开始,不记住上次的分类
+
+const T2S = {"測": "测", "試": "试", "師": "师", "後": "后", "資": "资", "設": "设", "計": "计", "開": "开", "發": "发", "數": "数", "據": "据", "營": "营", "運": "运", "產": "产", "經": "经", "專": "专", "員": "员", "網": "网", "絡": "络", "務": "务", "職": "职", "責": "责", "銷": "销", "廣": "广", "業": "业", "線": "线", "體": "体", "驗": "验", "環": "环", "遠": "远", "處": "处", "戶": "户", "帳": "账", "號": "号", "碼": "码", "語": "语", "華": "华", "貿": "贸", "會": "会", "財": "财", "稅": "税", "證": "证", "簽": "签", "護": "护", "執": "执", "層": "层", "級": "级", "總": "总", "監": "监", "長": "长", "組": "组", "團": "团", "隊": "队", "領": "领", "導": "导", "協": "协", "調": "调", "溝": "沟", "優": "优", "勢": "势", "獎": "奖", "勵": "励", "績": "绩", "準": "准", "備": "备", "讀": "读", "寫": "写", "說": "说", "聽": "听", "譯": "译", "書": "书", "學": "学", "歷": "历", "項": "项", "創": "创", "製": "制", "視": "视", "頻": "频", "劇": "剧", "畫": "画", "圖": "图", "檔": "档", "類": "类", "統": "统", "構": "构", "雲": "云", "庫": "库", "儲": "储", "緩": "缓", "機": "机", "習": "习", "規": "规", "劃": "划", "質": "质", "檢": "检", "異": "异", "風": "风", "險": "险", "審": "审", "賬": "账", "單": "单", "實": "实", "時": "时", "報": "报", "價": "价", "錢": "钱", "輔": "辅", "訓": "训", "練": "练", "錄": "录", "聯": "联", "繫": "系", "飛": "飞", "鏈": "链", "區": "区", "塊": "块", "遊": "游", "戲": "戏", "電": "电", "競": "竞", "東": "东", "亞": "亚", "灣": "湾", "臺": "台", "馬": "马", "來": "来", "種": "种", "選": "选", "擇": "择", "維": "维", "個": "个", "為": "为", "與": "与", "動": "动", "態": "态", "點": "点", "擊": "击", "轉": "转", "換": "换", "傳": "传", "輸": "输", "樣": "样", "標": "标", "題": "题", "際": "际", "國": "国", "內": "内", "雙": "双", "週": "周", "這": "这", "們": "们", "對": "对", "應": "应", "該": "该", "還": "还", "進": "进", "過": "过", "適": "适", "當": "当", "關": "关", "鍵": "键", "詞": "词", "顧": "顾", "問": "问", "須": "须", "樓": "楼", "場": "场", "賽": "赛", "盤": "盘", "擬": "拟", "狀": "状", "況": "况", "嚴": "严", "謹": "谨", "認": "认", "識": "识", "鬆": "松", "穩": "稳", "複": "复", "雜": "杂", "響": "响", "頁": "页", "嗎": "吗", "麼": "么", "於": "于", "從": "从", "並": "并", "將": "将", "結": "结", "閱": "阅", "夠": "够", "舉": "举", "辦": "办", "濟": "济", "圍": "围", "傷": "伤", "願": "愿", "給": "给", "紀": "纪", "約": "约", "縮": "缩", "細": "细", "範": "范", "織": "织", "揮": "挥", "頭": "头", "顯": "显", "屬": "属", "額": "额", "隨": "随", "變": "变", "讓": "让", "議": "议", "論": "论", "談": "谈", "請": "请", "誠": "诚", "謝": "谢", "豐": "丰", "負": "负", "費": "费", "貼": "贴", "賺": "赚", "購": "购", "貨": "货", "帶": "带", "幫": "帮", "廳": "厅", "歡": "欢", "獨": "独", "現": "现", "瓏": "珑", "闆": "板", "陸": "陆", "雖": "虽", "難": "难", "靜": "静", "順": "顺", "預": "预", "頓": "顿", "飯": "饭", "魚": "鱼", "鳥": "鸟", "黃": "黄"};
+function norm(s){ return (s||"").toLowerCase().replace(/[\u4e00-\u9fff]/g, ch => T2S[ch] || ch); }
+// 搜索不分繁简体:关键字和岗位内容都先转成简体再比对
+function currentQuery(){ return norm((document.getElementById('searchInput').value || '').trim()); }
+function matchesQuery(j, q){ return !q || norm(j.title).includes(q) || norm(j.jd).includes(q); }
+
+const chipRow = document.getElementById('chipRow');
+function renderChips(){
+  // 有关键字时,分类后面的数字显示「这个分类里有几个符合的岗位」
+  const q = currentQuery();
+  const counts = {};
+  let total = 0;
+  JOBS.forEach(j => { if (matchesQuery(j, q)) { counts[j.cat] = (counts[j.cat]||0) + 1; total++; } });
+  const chips = [{cat:null,label:'全部',n:total}].concat(
+    CATS.filter(c => catCounts[c]).map(c => ({cat:c,label:c,n:counts[c]||0}))
+  );
+  chipRow.innerHTML = chips.map(c => `
+    <div class="chip ${activeCat===c.cat ? 'active':''}" data-cat="${c.cat ?? ''}">
+      ${c.label} <span class="n">${c.n}</span>
+    </div>
+  `).join('');
+  chipRow.querySelectorAll('.chip').forEach(el => {
+    el.addEventListener('click', () => {
+      const v = el.getAttribute('data-cat');
+      activeCat = v === '' ? null : v;
+      renderChips();
+      render();
+    });
+  });
+}
+
+function escapeHtml(s){
+  return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function escapeRegex(s){
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+function highlight(rawText, q){
+  // 在转成简体后的文字里找关键字位置,再把原文对应的字标亮(繁体原文也能标亮)
+  rawText = rawText || '';
+  if (!q) return escapeHtml(rawText);
+  const n = norm(rawText);
+  if (n.length !== rawText.length) return escapeHtml(rawText);
+  let out = '', i = 0, k;
+  while ((k = n.indexOf(q, i)) !== -1){
+    out += escapeHtml(rawText.slice(i, k)) + '<mark>' + escapeHtml(rawText.slice(k, k + q.length)) + '</mark>';
+    i = k + q.length;
+  }
+  return out + escapeHtml(rawText.slice(i));
+}
+
+const list = document.getElementById('list');
+const empty = document.getElementById('empty');
+const statsEl = document.getElementById('stats');
+
+function render(){
+  const q = currentQuery();
+
+  let filtered = JOBS.filter(j => {
+    if (activeCat && j.cat !== activeCat) return false;
+    return matchesQuery(j, q);
+  });
+
+  // 有关键字时:标题命中的排在前面(最相关),仅描述里命中的排后面,
+  // 且给后者打上"命中于描述"的提示,避免看起来像误匹配。
+  if (q){
+    filtered = filtered
+      .map((j, idx) => ({ j, idx, titleHit: norm(j.title).includes(q) }))
+      .sort((a, b) => {
+        if (a.titleHit !== b.titleHit) return a.titleHit ? -1 : 1;
+        return a.idx - b.idx; // 稳定排序,组内保持原顺序
+      })
+      .map(x => x.j);
+  }
+
+  statsEl.textContent = `显示 ${filtered.length} / ${JOBS.length} 个职位`;
+
+  if (filtered.length === 0){
+    list.innerHTML = '';
+    empty.hidden = false;
+    return;
+  }
+  empty.hidden = true;
+
+  const anyTitleHit = q && filtered.some(j => norm(j.title).includes(q));
+  let dividerShown = false;
+  list.innerHTML = filtered.map(j => {
+    const titleHit = q ? norm(j.title).includes(q) : false;
+    const jdOnlyHit = q && !titleHit;
+    let divider = '';
+    if (jdOnlyHit && !dividerShown){
+      dividerShown = true;
+      divider = `<div class="hit-divider">${anyTitleHit ? '以下是' : ''}岗位名称不含「${escapeHtml(q)}」、只在描述里提到的岗位</div>`;
+    }
+    const titleHtml = highlight(j.title, q);
+    const jdHtml = highlight(j.jd, q);
+    return divider + `
+    <div class="card">
+      <div class="card-top">
+        <span class="card-tag">${escapeHtml(j.cat)}</span>
+        <span class="card-id">#${escapeHtml(j.id)}</span>
+      </div>
+      <h3>${titleHtml}</h3>
+      <div class="badge-row">
+        ${j.salary ? `<span class="salary">${escapeHtml(j.salary)}</span>` : ''}
+        ${j.location ? `<span class="location">📍 ${escapeHtml(j.location)}</span>` : ''}
+        ${jdOnlyHit ? `<span class="card-tag jd-match">命中于描述</span>` : ''}
+      </div>
+      <div class="jd" id="jd-${j.id}">${jdHtml}</div>
+      <div class="card-actions">
+        <button class="toggle-btn" data-id="${j.id}">展开全文 ▾</button>
+        <div class="right-actions">
+          ${(j.notes || []).filter(k => NOTES[k]).map(k => `<button class="jp-btn" type="button" data-note="${escapeHtml(k)}">${escapeHtml(NOTES[k].btn)}</button>`).join('')}
+          <button class="copy-btn" data-id="${j.id}">📋 JD复制</button>
+          <a class="apply-btn" href="https://t.me/${encodeURIComponent(j.tg || 'y666899y')}" target="_blank" rel="noopener">投递 / 咨询 ↗</a>
+        </div>
+      </div>
+    </div>
+  `;
+  }).join('');
+
+  list.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const jd = document.getElementById('jd-' + btn.getAttribute('data-id'));
+      const isExpanded = jd.classList.toggle('expanded');
+      btn.textContent = isExpanded ? '收起 ▴' : '展开全文 ▾';
+    });
+  });
+
+  list.querySelectorAll('.jp-btn').forEach(btn => btn.addEventListener('click', () => openNote(btn.dataset.note)));
+
+  list.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      const job = JOBS.find(j => String(j.id) === String(id));
+      if (!job) return;
+      const parts = [job.title];
+      if (job.salary) parts.push(job.salary);
+      if (job.location) parts.push('📍 ' + job.location);
+      parts.push('');
+      parts.push(job.jd);
+      const text = parts.join('\n');
+      copyText(text, btn);
+    });
+  });
+}
+
+function copyText(text, btn){
+  const showCopied = () => {
+    const original = btn.dataset.label || btn.textContent;
+    btn.dataset.label = original;
+    btn.textContent = '✓ 已复制';
+    btn.classList.add('copied');
+    clearTimeout(btn._copyTimer);
+    btn._copyTimer = setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(showCopied).catch(() => fallbackCopy(text, showCopied));
+  } else {
+    fallbackCopy(text, showCopied);
+  }
+}
+
+function fallbackCopy(text, onDone){
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.left = '-9999px';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); onDone(); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+document.getElementById('searchInput').addEventListener('input', () => {
+  // 打关键字时自动回到「全部」,避免只在某个分类里找而漏掉
+  if (currentQuery() && activeCat) activeCat = null;
+  renderChips();
+  render();
+});
+
+const jpModal = document.getElementById('jpModal');
+function openNote(key){
+  const n = NOTES[key];
+  if (!n) return;
+  document.getElementById('jpTitle').textContent = n.title;
+  document.getElementById('jpBody').textContent = n.body.replace(/^\S*上班须知\s*/, '');
+  jpModal.hidden = false;
+}
+function closeJapan(){
+  jpModal.hidden = true;
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+}
+document.getElementById('jpClose').addEventListener('click', closeJapan);
+jpModal.addEventListener('click', e => { if (e.target === jpModal) closeJapan(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !jpModal.hidden) closeJapan(); });
+
+renderChips();
+render();
+const hashKey = Object.keys(NOTES).find(k => '#' + NOTES[k].anchor === location.hash);
+if (hashKey) openNote(hashKey);
+</script>
